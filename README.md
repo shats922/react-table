@@ -1,1 +1,1 @@
-Visit - "https://shats922.github.io/react-table/"
+Visit - https://shats922.github.io/react-table/
