@@ -1,0 +1,17 @@
+1. How did you handle inline editing in the table?
+=>Inline editing in the table wass handled by specifying editors for the columns in the columns array of the Tabulator configuration. For example, the "Title" and "Description" columns use the input editor, and the "Status" column uses the list editor.
+
+2. Explain how you fetched and processed the data from the dummy API.
+=>The data wass fetched from the https://jsonplaceholder.typicode.com/todos endpoint using the fetch API within the onTableRef function. This function is called when the table is referenced (i.e., when the ReactTabulator component is rendered).
+The fetch function makes an HTTP GET request to the provided URL.
+The res.json() method parses the JSON response.
+The resulting data is an array of objects representing To Do or Done.
+
+3. What approach did you use to filter tasks based on status?
+=>To filter tasks based on status, the Tabulator library's headerFilter feature wass used. This feature allows each column to have its own filter input field in the header, which can be used to filter the table data dynamically based on the input.
+
+4. How did you manage the state of tasks when adding or editing them?
+=> The state of the tasks is managed primarily through the ReactTabulator component, which internally handles the data and its updates.
+
+5. What challenges did you face during development, and how did you overcome them?
+=>The challenge I faced was with the positioning of the popup container when clicking on the "Status" cell for inline editing. By default, Tabulator appends the popup container to the body of the document, which caused the popup to appear far from the clicked cell, leading to a poor user experience. To overcome this, I tracked the position of the clicked cell using the getBoundingClientRect() method, which provides the cell's position relative to the viewport. Once I obtained the cell's position, I wrote custom logic inside the cellClick event to adjust the popup container’s position. By modifying the popup’s top and left properties, I ensured it was aligned with the clicked cell and positioned just below it. Since the popup might not be immediately available after a cell click, I used a setTimeout function to repeatedly check if the popup had been rendered and, once available, set its position accordingly. This solution allowed me to position the popup correctly and improve the overall user experience by ensuring that the dropdown for selecting the status appeared right next to the clicked cell.
