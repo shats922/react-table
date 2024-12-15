@@ -2,6 +2,7 @@ import "react-tabulator/lib/styles.css";
 import "react-tabulator/css/bootstrap/tabulator_bootstrap.min.css";
 import "./App.css";
 import { ReactTabulator } from "react-tabulator";
+const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 const list = ["To Do", "In Progress", "Done"];
 var table;
@@ -11,7 +12,7 @@ function onTableRef(ref) {
   table = ref.current;
   flag++;
 
-  if(flag === 1) {
+  if(isDev && flag === 1) {
     return;
   }
   // fetch data from api
@@ -37,7 +38,6 @@ function addTask(formData) {
   const status = formData.get("status");
   const data = table.getData();
   const i = data.length + 1;
-  console.log(data)
 
   table.addData(
     [
